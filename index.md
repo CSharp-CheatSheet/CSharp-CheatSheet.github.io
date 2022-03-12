@@ -12,7 +12,7 @@ last_modified_at: 2022-03-12
 
 C# CheatSheet is a website storing teaching material for c# development.
 
-
+---
 # C# Environment Setup
 
 Windows:
@@ -22,7 +22,7 @@ Windows:
 MacOS:
   * Visual Studio 2022: not yet support
   * Visual Studio 2019: .Net 5, support Class Diagram
-  * Visual Studio Code: .Net 5, support PUML Class Diagram
+  * Visual Studio Code: .Net 5, .Net 6, support PUML Class Diagram (tested on Mojave)
 
 Linux:
   * Visual Studio Code: .Net 5, support PUML Class Diagram (not yet tested)
@@ -30,7 +30,7 @@ Linux:
 ## Install IDE and .NET Framework
 
   * [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
-  * [Visual Studio Code](https://code.visualstudio.com), [.Net 5 or .Net 6 Runtime](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
+  * [Visual Studio Code](https://code.visualstudio.com), [.Net 5 or .Net 6 Runtime](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks), [Tutorial](https://www.c-sharpcorner.com/article/how-to-setup-visual-studio-code-for-c-sharp-10-and-net-6-0/)
 
 ## CSharp to PlantUML (For Visual Studio Code Users)
 
@@ -48,6 +48,12 @@ Linux:
 
 ## First Program
 
+```bash
+$ dotnet --info // check the version installed in your system
+$ dotnet new console
+```
+
+In Program.cs
 ```csharp
 using System
 namespace MyApp
@@ -79,7 +85,7 @@ $ dotnet build
 $ dotnet run
 ```
 
-
+---
 # Selected Theory
 
 ## Naming Convention [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions)
@@ -90,4 +96,5 @@ Use pascal casing ("PascalCasing") when naming a class, record, or struct. When 
 ### Camel Case
 Use camel casing ("camelCasing") when naming private or internal fields, and prefix them with _.
 
+---
 # External Resources
