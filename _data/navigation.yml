@@ -1,0 +1,18 @@
+# main links
+main:
+  - title: "C# Basics"
+    url: /pages/basics
+  - title: "Class and Inheritance"
+    url: /pages/class
+  # - title: "Knitting for Fun"
+  #   url: /pages/knitting
+  # - title: "Maker Gallery"
+  #   url: /pages/gallery
+  # - title: "About"
+  #   url: https://mmistakes.github.io/minimal-mistakes/about/
+  # - title: "Sample Posts"
+  #   url: /year-archive/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/

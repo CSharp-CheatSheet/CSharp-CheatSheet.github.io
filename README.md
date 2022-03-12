@@ -1,2 +1,2 @@
-# CSharp-CheatSheet.github.io
-Teaching material for C# programming
+# CSharpCheatSheet
+Teaching material for C#
