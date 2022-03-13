@@ -2,8 +2,14 @@
 main:
   - title: "C# Basics"
     url: /pages/basics
-  - title: "Class and Inheritance"
+  - title: "Class"
     url: /pages/class
+  - title: "Inheritance"
+    url: /pages/inheritance
+  - title: "Polymorphism"
+    url: /pages/polymorphism
+  - title: "Assignment"
+    url: /pages/assignment
   # - title: "Knitting for Fun"
   #   url: /pages/knitting
   # - title: "Maker Gallery"
