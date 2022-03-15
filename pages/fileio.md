@@ -9,11 +9,7 @@ header:
 last_modified_at: 2022-03-13
 ---
 
-# TBD
+# Serializing Objects In C#
 
 ---
 # Selected Theory
-
-## Useful Advanced C# Data Structure
-
-* Collections [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections). We will introduce one-by-one later.
