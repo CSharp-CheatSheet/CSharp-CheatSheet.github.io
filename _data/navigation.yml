@@ -8,6 +8,14 @@ main:
     url: /pages/inheritance
   - title: "Polymorphism"
     url: /pages/polymorphism
+  - title: "Collections"
+    url: /pages/collection
+  - title: ".Net Type"
+    url: /pages/dotnettype
+  - title: "File IO"
+    url: /pages/fileio
+  - title: "Performance"
+    url: /pages/performance
   - title: "Assignment"
     url: /pages/assignment
   # - title: "Knitting for Fun"

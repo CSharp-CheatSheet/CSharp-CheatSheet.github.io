@@ -165,8 +165,6 @@ public Cat ProduceKittyWith(Cat partner)
 }
 ```
 
-##  Event Handler [Doc](https://docs.microsoft.com/en-us/dotnet/standard/events/)
-
 ---
 # Splitting Files to Organize Them
 ```bash
@@ -184,7 +182,7 @@ MyBusiness/MyBusiness> $ cd ../PetLibrary
 MyBusiness/PetLibrary> $ dotnet new classlib
 MyBusiness/PetLibrary> $ mv Class1.cs Animals.cs
 // Go back to the folder MyBusiness and run the program
-MyBusiness/MyBusiness> $ cd ../MyBusiness
+MyBusiness/PetLibrary> $ cd ../MyBusiness
 MyBusiness/MyBusiness> $ dotnet run
 ```
 
@@ -202,7 +200,13 @@ In MyBusiness.csproj, you see the configuration of the program
   // Set environment variable
   <ItemGroup>
     <ProjectReference
+      // On Windows
       Include="..\PetLibrary\PetLibrary.csproj" />
+      // On MacOS, Unix
+      Include="../PetLibrary/PetLibrary.csproj" />        
+      // The slash and backslash presentation used to describe a path were not
+      // standardized. It causes a lot of pain.
+      // Some morden editors automatically convert them.
   </ItemGroup>
 
 </Project>
@@ -257,14 +261,12 @@ namespace Animals
         // Default constructor. It will be called by default
         public Cat()
         {
-            Speed = 0.0;
             Name = "Unknown";
             DateOfBirth = DateTime.Today;
         }
         // Parameterized Constructor
         public Cat(string name, DateTime dateOfBirth)
         {
-            Speed = 0.0;
             this.Name = name;
             this.DateOfBirth = dateOfBirth;
         }

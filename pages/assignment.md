@@ -50,6 +50,9 @@ namespace MyApplication
 # C# Homework Assignment 3: Bubble Sort
 
 ```csharp
+/*
+Sorting Algorithm
+*/
 using System;
 
 // namespace
