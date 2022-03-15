@@ -309,16 +309,42 @@ namespace Animals
 ```
 
 ---
+# Key OOP Concept
+
+It is like a phylogenetic tree. The higher hierarchy you climb, the more abstract concept about the object you get.
+
+* **Objects:** instances of classes. E.g., my cat.
+
+* **Class:** the blueprint for the data type (variables) and available methods for a given type or class of object. E.g., cat. Something that is cute, fluffy, with two eyes, four legs and a tail.
+
+---
+* **Encapsulation:** the combination of the data and actions that are related to an object. Achieve by using access modifiers, which is a way to ensure security. E.g., a cat can access its toilet.
+
+* **Composition:** is about what an object is made of. E.g., A cat has two eyes, four legs and a tail.
+
+* **Aggregation:** is about what can be combined with an object. E.g., a cat does not have a horn. You cannot ask a cat to fly like a bird, but it can walk like a quadruped.
+
+* **Inheritance:** reuse code by having a subclass derive from a base or superclass. All functionality in the base class is inherited by and becomes available in the derived class. E.g., quadruped. A cat inherits the function of a quadruped.
+
+* **Polymorphism:** allow a derived class to override an inherited action to provide custom behavior. E.g., animal. Animals like dogs speak "Woof!", but cat speaks "Meow!".
+
+* **Abstraction:** is about capturing the core idea of an object and ignoring the details or specifics. C# has an abstract keyword which formalizes the concept. If a class is not explicitly abstract, then it can be described as being concrete. E.g., define a abstract class called **Animal** (a live creature that moves), but implement its derived class **Cat** by giving actual behaviors of a cat.
+
+
+---
 # Inheriting Classes
 In C#, classes are used to create custom types. Inheritance is the process by which one class inherits the members of another class.
 
 # Self-Defined Interface [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface)
 An **interface** defines a contract. Any class or struct that implements that contract must provide an implementation of the members defined in the interface. Note that you cannot apply access modifiers to interface members.
 
+The basic difference is that a **class** has both a definition and an implementation whereas an **interface** only has a definition.
+
+**Interfaces** don't contain fields because fields represent a specific implementation of data representation, and exposing them would break encapsulation.
+
 In MyBusiness/Program.cs,
 ```csharp
 using System;
-using System.Collections.Generic;
 using Animals;
 
 // namespace
@@ -345,6 +371,8 @@ The animal namespace
 namespace Animals
 {
     public class Cat : IRun
+    // ":" operator allows Cat class to reuse what has been defined in IRun.
+    // Naming convention: add I for an interface name.
     {
         /*
         Class field, including different variables
@@ -355,8 +383,6 @@ namespace Animals
         public string Name;
         // The birthday of the cat
         public DateTime DateOfBirth;
-        // The children of the cat
-        public List<Cat> Children = new List<Cat>();
 
         /*
         Class methods, where functions should be implemented
@@ -382,36 +408,6 @@ namespace Animals
         {
         }
 
-        // Print out method
-        public void WriteToConsole()
-        {
-            Console.WriteLine($"{Name} was born on a {DateOfBirth:dddd}.");
-        }
-
-        // Static method to "multiply"
-        public static Cat ProduceKitty(Cat cat1, Cat cat2)
-        {
-            Cat kitty = new Cat
-            {
-                Name = $"Baby of {cat1.Name} and {cat2.Name}"
-            };
-            cat1.Children.Add(kitty);
-            cat2.Children.Add(kitty);
-            return kitty;
-        }
-
-        // Use operators instead of the above method
-        public static Cat operator *(Cat cat1, Cat cat2)
-        {
-            return Cat.ProduceKitty(cat1, cat2);
-        }
-
-        // Instance method to "multiply"
-        public Cat ProduceKittyWith(Cat partner)
-        {
-            return ProduceKitty(this, partner);
-        }
-
         // Implementation of interface IRun
         public double Speed { get; set; }
         public int Distance { get; }
@@ -424,8 +420,12 @@ namespace Animals
 
     // IRun is an interface
     // You have variables and methods, but you don't implement them.
+    // No access modifier is allowed.
     interface IRun
     {
+        // Instance field
+        // double Velocity; // compile error
+        // Property
         double Speed { get; set; }
         int Distance { get; }
 
@@ -442,14 +442,13 @@ $ Nana is running at speed 2 km/hr.
 In MyBusiness/Program.cs,
 ```csharp
 using System;
-using System.Collections.Generic;
 using Animals;
 
 // namespace
 namespace MyBusiness
 {
     // main program
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -488,6 +487,7 @@ The animal namespace
 namespace Animals
 {
     public class Cat : IComparable<Cat>
+    // You can check the definition of IComparible
     {
         /*
         Class field, including different variables
@@ -498,8 +498,6 @@ namespace Animals
         public string Name;
         // The birthday of the cat
         public DateTime DateOfBirth;
-        // The children of the cat
-        public List<Cat> Children = new List<Cat>();
 
         /*
         Class methods, where functions should be implemented
@@ -531,10 +529,10 @@ namespace Animals
 
         // Implementation of interface IComparible
         // Also check the class "public class Cat : IComparable<Cat>"
-        public int CompareTo(Cat? other)
+        public int CompareTo(Cat? anotherCat)
         {
-            if (other != null)
-                return Name.CompareTo(other.Name);
+            if (anotherCat != null)
+                return Name.CompareTo(anotherCat.Name);
             else
                 return 0;
         }
@@ -551,126 +549,8 @@ $ Kiwi
 $ Nana
 ```
 
-# Generics [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics)
-
-In MyBusiness/Program.cs,
-```csharp
-using System;
-using Animals;
-
-// namespace
-namespace MyBusiness
-{
-    // main program
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            // Cat is currently flexible, because any type can be set for the food field and input parameter.
-            // But there is no type checking, so inside the CheckFood method,
-            // we cannot safely do much and the results are sometimes not what you might expect
-            var t1 = new Cat();
-            t1.food = 5;
-            Console.WriteLine($"Cat food with an integer: {t1.CheckFood(5)}");
-            var t2 = new Cat();
-            t2.food = "fish";
-            Console.WriteLine($"Cat food with a string: {t2.CheckFood("fish")}");
-
-            // The type is defined at allocation
-            var gt1 = new GenericCat<int>();
-            gt1.food = 5;
-            Console.WriteLine($"Cat food with an integer: {gt1.CheckFood(5)}");
-            var gt2 = new GenericCat<string>();
-            gt2.food = "fish";
-            Console.WriteLine($"Cat food with a string: {gt2.CheckFood("fish")}");
-
-            // generic methods
-            string food1 = "4";
-            Console.WriteLine("Double cat food {0} to {1}",
-              arg0: food1,
-              arg1: GenericMethodCat.DoubleMyFood<string>(food1));
-            byte food2 = 3;
-            Console.WriteLine("Double cat food {0} to {1}",
-              arg0: food2,
-              arg1: GenericMethodCat.DoubleMyFood(food2));
-        }
-    }
-}
-```
-In PetLibrary/Animals.cs,
-```csharp
-/*
-The animal namespace
-*/
-namespace Animals
-{
-    // Working with non-generic types
-    public class Cat
-    {
-        public object? food = default(object);
-        public string CheckFood(object input)
-        {
-            if (food == input)
-            {
-                return "Expected food and input are the same.";
-            }
-            else
-            {
-                return "Expected food and input are NOT the same.";
-            }
-        }
-    }
-
-    // Working with generic types
-    // One can consider T as a kind of template
-    public class GenericCat<T> where T : IComparable
-    {
-        // A default() returns the default value of type parameter. Here is used for initialization.
-        public T? food = default(T?);
-
-        public string CheckFood(T input)
-        {
-            if (food == null)
-            {
-                return "Expected food is empty.";
-            }
-            else if (food.CompareTo(input) == 0)
-            {
-                return "Expected food and input are the same.";
-            }
-            else
-            {
-                return "Expected food and input are NOT the same.";
-            }
-        }
-    }
-
-    // Working with generic methods
-    // One can consider T as a kind of template
-    public class GenericMethodCat
-    {
-        public static double DoubleMyFood<T>(T input)
-        where T : IConvertible
-        {
-            // convert using the current culture
-            double d = input.ToDouble(
-                Thread.CurrentThread.CurrentCulture);   
-                // A system method to convert a string to a double, we simply use it for now.
-            return 2 * d;
-        }
-    }
-}
-```
-```bash
-$ Cat food with an integer: Expected food and input are NOT the same.
-$ Cat food with a string: Expected food and input are the same.
-$ Cat food with an integer: Expected food and input are the same.
-$ Cat food with a string: Expected food and input are the same.
-$ Double cat food 4 to 8
-$ Double cat food 3 to 6
-```
-
 # Class Inheritance [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance)
+
 **Inheritance**, together with encapsulation and polymorphism, is one of the three primary characteristics of object-oriented programming.
 
 In PetLibrary/Animals.cs, add another class
@@ -701,7 +581,6 @@ public class WildCat : Cat
 In MyBusiness/Program.cs,
 ```csharp
 using System;
-using System.Collections.Generic;
 using Animals;
 
 // namespace
@@ -733,12 +612,11 @@ namespace MyBusiness
             leopard.WriteToConsole();
             petCat.WriteToConsole();
             Console.WriteLine(leopard.GetName());
-            Console.WriteLine(petCat.GetName());        // It is calling the method from the derived class. Strange?
-                                                        // The compiler is not smart, thus casting is important!
+            Console.WriteLine(petCat.GetName());        
+            // It is calling the method from the derived class. Strange?
         }
     }
 }
-
 ```
 In PetLibrary/Animals.cs,
 ```csharp
@@ -783,7 +661,8 @@ namespace Animals
         {
         }
 
-        // Must should have existed from the parent class, from System.Object in this case
+        // Must should have existed from the base class, from System.Object in this case
+        // ToString has been defined in the namespace System
         public override string ToString()
         {
             return Name;
@@ -807,7 +686,7 @@ namespace Animals
         public DateTime FoundDate { get; set; }
 
         // overridden methods
-        // based on the keyword overide
+        // based on the keyword override
         public override string ToString()
         {
             return $"{Name}: from {CountryCode}";
@@ -831,8 +710,116 @@ namespace Animals
     }
 }
 ```
+```bash
+$ Alice was born on 15/03/22 and found on 01/01/01
+$ Alice was born on a Tuesday.
+$ Alice: from Taiwan
+$ Alice: from Taiwan
+```
 
-# Virtual Function [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual)
+## Initialize a Derived Class
+
+You can create a constructor and pass the base object during the declaration.
+
+In MyBusiness/Program.cs,
+```csharp
+using System;
+using Animals;
+
+// namespace
+namespace MyBusiness
+{
+    // main program
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create a cat array
+            Cat nana = new Cat("Nana", new DateTime(2019, 12, 9));
+            WildCat leopard = new WildCat
+            {
+                Name = "Alice",
+                CountryCode = "Taiwan"
+            };
+            WildCat nanaQ = new WildCat(nana);
+
+            nana.WriteToConsole();
+            leopard.WriteToConsole();
+            nanaQ.WriteToConsole();
+        }
+    }
+}
+```
+
+In PetLibrary/Animals.cs,
+```csharp
+public class WildCat : Cat
+{
+    public string? CountryCode { get; set; }
+    public DateTime FoundDate { get; set; }
+
+    // Default Constructor
+    public WildCat()
+    {
+    }
+
+    // Parameterized Constructor
+    public WildCat(Cat cat)
+    {
+        this.Name = cat.Name;
+        this.DateOfBirth = cat.DateOfBirth;
+    }
+
+    // hidden methods
+    // based on the keyword new
+    public new void WriteToConsole()
+    {
+        // base.WriteToConsole();
+        Console.WriteLine(format:
+          "{0} was born on {1:dd/MM/yy} and found on {2:dd/MM/yy}",
+          arg0: Name,
+          arg1: DateOfBirth,
+          arg2: FoundDate);
+    }
+}
+```
+
+## base Keyword [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/base)
+
+The base keyword is used to access members of the base class from within a derived class.
+
+
+
+## Virtual Function [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual)
+
+By default, methods are non-virtual. You cannot override a non-virtual method.
+
+## Preventing Inheritance and Overriding
+
+Using the keyword sealed.
+
+In PetLibrary/Animals.cs, add
+```csharp
+public class WildCat : Cat
+{
+    public sealed override string GetName()
+    {
+        return $"{Name}: from {CountryCode}";
+    }  
+}
+
+public class MonsterCat : WildCat
+{
+    public override string GetName()
+    {
+        return "I am a monster.";
+    }
+}
+```
+```bash
+$ cannot override inherited member because it is sealed
+```
+
 
 ---
 # Selected Theory

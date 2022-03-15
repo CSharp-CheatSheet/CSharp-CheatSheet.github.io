@@ -275,6 +275,7 @@ do
 for(int i = 0; i < 10; i++)
 {
     // Do something here.
+    Console.WriteLine(i);
 }
 
 int[] numbers = { 3, 14, 59 };
@@ -283,6 +284,17 @@ for(int i = 0; i < numbers.Length; i++)
     // Do something here.
     Console.WriteLine(numbers[i]);
 }
+```
+
+### foreach
+```csharp
+var fibNumbers = new List<int> { 0, 1, 1, 2, 3, 5, 8, 13 };
+foreach (int element in fibNumbers)
+{
+    Console.Write($"{element} ");
+}
+// Output:
+// 0 1 1 2 3 5 8 13
 ```
 
 ### C# Jump Statements [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements)
