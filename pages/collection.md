@@ -9,6 +9,22 @@ header:
 last_modified_at: 2022-03-13
 ---
 
+# Lambda Expression [Doc](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions)
+
+You use a lambda expression to create an anonymous function. Use the lambda declaration operator **=>** to separate the lambda's parameter list from its body. A lambda expression can be of any of the following two forms:
+
+* **Expression lambda** that has an expression as its body:
+
+```csharp
+(input-parameters) => expression
+```
+
+* **Statement lambda** that has a statement block as its body:
+
+```csharp
+(input-parameters) => { <sequence-of-statements> }
+```
+
 # System.Collections.Generic Namespace [Doc](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-6.0)
 
 ## Array (Static at Runtime)
