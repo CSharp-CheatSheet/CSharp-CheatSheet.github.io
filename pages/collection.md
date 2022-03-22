@@ -536,20 +536,6 @@ $ key: 4, value:
 $ key: 5, value: Five
 ```
 
-The SortedDictionary<TKey, TValue> generic class is a binary search tree with O(log n) retrieval, where n is the number of elements in the dictionary. In this, it is similar to the  SortedList<TKey, TValue> generic class. The two classes have similar object models, and both have O(log n) retrieval. Where the two classes differ is in memory use and speed of insertion and removal:
-
-* SortedList<TKey, TValue> uses less memory than SortedDictionary<TKey, TValue>.
-* SortedDictionary<TKey, TValue> has faster insertion and removal operations for unsorted data, O(log n) as opposed to O(n) for  SortedList<TKey, TValue>.
-* If the list is populated all at once from sorted data, SortedList<TKey, TValue> is faster than  SortedDictionary<TKey, TValue>.
-
-|------------------|---------|----------|--------|----------|----------|---------|
-| Collection       | Indexed | Keyed    | Value  | Addition |  Removal | Memory  |
-|                  | lookup  | lookup   | lookup |          |          |         |
-|------------------|---------|----------|--------|----------|----------|---------|
-| SortedList       | O(1)    | O(log n) | O(n)   | O(n)     | O(n)     | Lesser  |
-| SortedDictionary | O(n)    | O(log n) | O(n)   | O(log n) | O(log n) | Greater |
-|------------------|---------|----------|--------|----------|----------|---------|
-
 ## SortedSet [Doc](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1?view=net-6.0)
 
 ```csharp
@@ -809,8 +795,27 @@ $ 1, 2, 3, 31, 32, 4, 5,
 $ 1, 2, 31, 32, 4, 5,
 ```
 
-
 ---
 # Selected Theory
 
 # Complexity Theory
+## Sequential/Linear Search vs. Binary Search [Doc](https://www.tutorialspoint.com/comparison-of-searching-methods-in-data-structures)
+
+## Big O Notation [Doc](https://en.wikipedia.org/wiki/Big_O_notation)
+Big O notation is a mathematical notation that describes the limiting behavior of a function when the argument tends towards a particular value or infinity.
+
+## SortedList vs. SortedDictionary
+
+The SortedDictionary<TKey, TValue> generic class is a binary search tree with O(log n) retrieval, where n is the number of elements in the dictionary. In this, it is similar to the  SortedList<TKey, TValue> generic class. The two classes have similar object models, and both have O(log n) retrieval. Where the two classes differ is in memory use and speed of insertion and removal:
+
+* SortedList<TKey, TValue> uses less memory than SortedDictionary<TKey, TValue>.
+* SortedDictionary<TKey, TValue> has faster insertion and removal operations for unsorted data, O(log n) as opposed to O(n) for  SortedList<TKey, TValue>.
+* If the list is populated all at once from sorted data, SortedList<TKey, TValue> is faster than  SortedDictionary<TKey, TValue>.
+
+|------------------|---------|----------|--------|----------|----------|---------|
+| Collection       | Indexed | Keyed    | Value  | Addition |  Removal | Memory  |
+|                  | lookup  | lookup   | lookup |          |          |         |
+|------------------|---------|----------|--------|----------|----------|---------|
+| SortedList       | O(1)    | O(log n) | O(n)   | O(n)     | O(n)     | Lesser  |
+| SortedDictionary | O(n)    | O(log n) | O(n)   | O(log n) | O(log n) | Greater |
+|------------------|---------|----------|--------|----------|----------|---------|

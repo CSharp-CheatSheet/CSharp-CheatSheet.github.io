@@ -9,9 +9,25 @@ header:
 last_modified_at: 2022-03-13
 ---
 
-# Thread
+## Raising and handling events
 
-# Deadlock
+# Handling Events [Doc](https://docs.microsoft.com/en-us/dotnet/api/system.eventhandler-1?view=net-6.0)
+
+##  Event Handler [Doc](https://docs.microsoft.com/en-us/dotnet/standard/events/)
+
+
+# Understanding processes, threads, and tasks
+
+# Monitoring performance and resource usage
+
+# Running tasks asynchronously
+
+
+## Synchronizing access to shared resources
+
+## Understanding async and await
 
 ---
 # Selected Theory
+
+## Deadlock
