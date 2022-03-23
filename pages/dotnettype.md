@@ -6,7 +6,7 @@ classes: wide
 header:
   image: /assets/images/teaser/teaser.png
   caption: "Image credit: [**Yun**](http://yun-vis.net)"  
-last_modified_at: 2022-03-13
+last_modified_at: 2022-03-23
 ---
 
 # How to improve code readability?
@@ -115,7 +115,7 @@ namespace MyBusiness
 
         // My first delegate
         public delegate int[] GenerateMyNumbers(int x, int y);
-
+        // Create an arry with size amount and assign a random value 0-maxNum in this array
         public static int[] GetRandomNumber(int maxNum, int amount)
         {
             Random random = new Random();
@@ -128,7 +128,7 @@ namespace MyBusiness
             }
             return nums;
         }
-
+        // Get an ordered integer sequence from min to max
         public static int[] GetOrderedNumber(int max, int min)
         {
             // Avoid when max is smaller than min
@@ -176,6 +176,7 @@ namespace MyBusiness
             Console.WriteLine(string.Join(",", Change3(array)));
         }
 
+        // Take out each elemnt in an array and +1
         public static int[] Change1(int[] _array)
         {
             var array = new int[_array.Length];
@@ -185,6 +186,7 @@ namespace MyBusiness
             }
             return array;
         }
+        // Take out each elemnt in an array and *2
         public static int[] Change2(int[] _array)
         {
             var array = new int[_array.Length];
@@ -194,6 +196,7 @@ namespace MyBusiness
             }
             return array;
         }
+        // Take out each elemnt in an array and square it
         public static int[] Change3(int[] _array)
         {
             var array = new int[_array.Length];
@@ -223,6 +226,7 @@ namespace MyBusiness
         {
             var array = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
+            // Create three delegate objects that take differentmethods as parameters
             MyDelegate myDelegate1 = new MyDelegate(AddOne);
             MyDelegate myDelegate2 = new MyDelegate(MultipleTwo);
             MyDelegate myDelegate3 = new MyDelegate(Square);
@@ -254,6 +258,9 @@ namespace MyBusiness
         {
             return number * number;
         }
+
+        // A method Change that takes another method as the input parameters
+        // In this case, the method (as a parameter) should be defined as a delegate
         public static int[] Change(int[] _array, MyDelegate myDelegate)
         {
             var array = new int[_array.Length];
@@ -297,6 +304,7 @@ namespace MyBusiness
             Addition(10, 20);
         }
 
+        // add param1 and param2 and return the sum
         private static void AddNumbers(int param1, int param2)
         {
             int result = param1 + param2;
@@ -330,6 +338,7 @@ namespace MyBusiness
             Console.WriteLine($"Addition = {result}");
         }
 
+        // add param1 and param2 and return the sum
         private static int AddNumbers(int param1, int param2)
         {
             return param1 + param2;
@@ -369,6 +378,7 @@ namespace MyBusiness
 
         private static bool IsApple(string modelName)
         {
+            // Check if the model name an iPhone
             if (modelName == "I Phone X")
                 return true;
             else
@@ -410,7 +420,7 @@ if (petCat is WildCat)
 }
 ```
 
-## is Operatpr
+## is Operator
 
 The **is** operator will check if the run-time type of an expression is compatible with a given type. The **as** operator considers only reference, nullable, boxing, and unboxing conversions.
 
@@ -446,7 +456,9 @@ namespace MyBusiness
 
             for (int i = 0; i < myObjects.Length; i++)
             {
+                // Convert an element in the myobjects array to a string element
                 string? s = myObjects[i] as string;
+                // Print out the current element
                 Console.Write($"Inspecting element: {myObjects[i]}");
 
                 // If converted successfully, s will be a string, otherwise return null.
