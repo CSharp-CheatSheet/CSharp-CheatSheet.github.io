@@ -6,7 +6,7 @@ classes: wide
 header:
   image: /assets/images/teaser/teaser.png
   caption: "Image credit: [**Yun**](http://yun-vis.net)"  
-last_modified_at: 2022-03-13
+last_modified_at: 2022-03-30
 ---
 
 # Program Deployment
@@ -230,6 +230,17 @@ namespace MyBusiness
 ```
 On Windows
 ```bash
+$ Path.PathSeparator                ;
+$ Path.DirectorySeparatorChar       \
+$ Directory.GetCurrentDirectory()   C:\Users\lbwu\Dropbox\FH\BCC\C-Sharp\Codes\CRC_CSD-09\MyBusiness
+$ Environment.CurrentDirectory      C:\Users\lbwu\Dropbox\FH\BCC\C-Sharp\Codes\CRC_CSD-09\MyBusiness
+$ Environment.SystemDirectory       C:\Windows\system32
+$ Path.GetTempPath()                C:\Users\lbwu\AppData\Local\Temp\
+$ GetFolderPath(SpecialFolder
+$  .System)                         C:\Windows\system32
+$  .ApplicationData)                C:\Users\lbwu\AppData\Roaming
+$  .MyDocuments)                    C:\Users\lbwu\Documents
+$  .Personal)                       C:\Users\lbwu\Documents
 ```
 On MacOS
 ```bash
@@ -275,7 +286,6 @@ namespace MyBusiness
                             "{0,-30} | {1,-10} | {2,-7} | {3,18:N0} | {4,18:N0}",
                             drive.Name, drive.DriveType, drive.DriveFormat,
                             drive.TotalSize, drive.AvailableFreeSpace);
-
                 }
                 else
                 {
@@ -286,6 +296,17 @@ namespace MyBusiness
     }
 }
 ```
+On Windows
+```bash
+$ NAME                           | TYPE       | FORMAT  |       SIZE (BYTES) |         FREE SPACE
+$ C:\                            | Fixed      | NTFS    |  1,023,551,021,056 |    776,903,106,560
+$ H:\                            | Network    | NTFS    |      2,147,483,648 |      2,147,479,552
+$ I:\                            | Network    | NTFS    |  6,596,932,399,104 |    260,713,881,600
+$ M:\                            | Network    | NTFS    |     53,687,091,200 |     53,687,091,200
+$ P:\                            | Network    | NTFS    |  2,199,005,425,664 |    834,980,163,584
+$ S:\                            | Network    | NTFS    |  6,596,932,399,104 |    260,713,881,600
+```
+On MacOS
 ```bash
 $ NAME                           | TYPE       | FORMAT  |       SIZE (BYTES) |         FREE SPACE
 $ /                              | Fixed      | apfs    |    500,068,036,608 |      6,828,941,312
@@ -376,8 +397,10 @@ namespace MyBusiness
             // check if a file exists
             WriteLine($"Does it exist? {File.Exists(textFile)}");
             // create a new text file and write a line to it
-            StreamWriter textWriter = File.CreateText(textFile); textWriter.WriteLine("Hello, C#!");
-            textWriter.Close(); // close file and release resources WriteLine($"Does it exist? {File.Exists(textFile)}");
+            StreamWriter textWriter = File.CreateText(textFile);
+            textWriter.WriteLine("Hello, C#!");
+            textWriter.Close(); // close file and release resources
+            WriteLine($"Does it exist? {File.Exists(textFile)}");
                                 // copy the file, and overwrite if it already exists
             File.Copy(sourceFileName: textFile,
               destFileName: backupFile, overwrite: true);
@@ -598,11 +621,14 @@ namespace MyBusiness
             try
             {
                 // define a file to write to
-                string xmlFile = Combine(CurrentDirectory, "streams.xml"); // create a file stream
+                string xmlFile = Combine(CurrentDirectory, "streams.xml");
+                // create a file stream
                 xmlFileStream = File.Create(xmlFile);
-                // wrap the file stream in an XML writer helper // and automatically indent nested elements
+                // wrap the file stream in an XML writer helper
+                // and automatically indent nested elements
                 xml = XmlWriter.Create(xmlFileStream,
-                new XmlWriterSettings { Indent = true }); // write the XML declaration
+                new XmlWriterSettings { Indent = true });
+                // write the XML declaration
                 xml.WriteStartDocument();
                 // write a root element
                 xml.WriteStartElement("callsigns");
