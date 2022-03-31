@@ -893,6 +893,46 @@ $ Jones has 0 children.
 $ Cox has 1 children.
 ```
 
+## Taking Care of System-Dependent Methods [Doc](https://docs.microsoft.com/en-us/dotnet/api/system.environment.specialfolder?view=net-6.0)
+
+```csharp
+using System;
+
+namespace MyBusiness
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("My operating system (OS) is ");
+            Console.WriteLine(Environment.OSVersion);
+            Console.Write("Is my OS a Mac? ");            
+            Console.WriteLine(OperatingSystem.IsMacOS());
+            // Console.WriteLine(OperatingSystem.IsWindows());            
+            // Console.WriteLine(OperatingSystem.IsLinux());
+            Console.Write("Environment.SpecialFolder.Personal = ");
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+            Console.Write("Environment.SpecialFolder.UserProfile = ");
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+        }
+    }
+}
+```
+On Windows
+```bash
+My operating system (OS) is Microsoft Windows NT 10.0.19044.0
+Is my OS a Mac? False
+Environment.SpecialFolder.Personal = C:\Users\lbwu\Documents
+Environment.SpecialFolder.UserProfile = C:\Users\lbwu
+```
+On MacOS
+```bash
+My operating system (OS) is Unix 10.14.6
+Is my OS a Mac? True
+Environment.SpecialFolder.Personal = /Users/yun
+Environment.SpecialFolder.UserProfile = /Users/yun
+```
+
 ---
 # Selected Theory
 
